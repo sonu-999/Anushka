@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anushka's Skin Care | Liquid Glow</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Inter:wght@300;400;600&display=swap');
+
+        /* 1. ANIMATED BACKGROUND */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #fdfcfb, #eee1ff, #fff0f0, #e0f2ff);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            min-height: 100vh;
+            color: #1a1a1a;
+            margin: 0;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 2. LIQUID GLASS CARDS */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px) saturate(160%);
+            -webkit-backdrop-filter: blur(20px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .glass-card:active {
+            transform: scale(0.98);
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* 3. TEXT STYLES */
+        .serif { font-family: 'Playfair Display', serif; }
+
+        /* 4. ENTRANCE ANIMATION (ROBUST) */
+        .fade-in {
+            animation: fadeInBody 1.2s ease-out forwards;
+        }
+
+        @keyframes fadeInBody {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 5. MODAL/POPUP */
+        #quizModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(15px);
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="p-6 md:p-12 fade-in">
+
+    <nav class="flex justify-between items-center max-w-6xl mx-auto mb-16">
+        <span class="text-2xl font-bold italic serif">Anushka.</span>
+        <button onclick="openQuiz()" class="bg-black text-white px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest">The Quiz</button>
+    </nav>
+
+    <header class="max-w-4xl mx-auto text-center mb-20">
+        <h1 class="text-6xl md:text-8xl mb-6 serif font-bold">Liquid <span class="italic font-normal">Glow</span></h1>
+        <p class="text-gray-600 max-w-md mx-auto leading-relaxed">
+            High-refraction skincare routines designed for ultimate translucency.
+        </p>
+    </header>
+
+    <main class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <div class="glass-card p-10 flex flex-col justify-between min-h-[350px]">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-pink-500">New Protocol</span>
+                <h2 class="text-4xl mt-2 mb-4 serif italic">Lip Glaze</h2>
+                <p class="text-sm text-gray-500">Achieve a 12-hour mirror finish with our peptide-infused hydration layer.</p>
+            </div>
+            <button onclick="alert('Routine: 1. Exfoliate, 2. Hydrate, 3. Glaze.')" class="w-fit text-xs font-bold border-b border-black pb-1 mt-6">EXPLORE TECHNIQUE</button>
+        </div>
+
+        <div class="glass-card p-10 flex flex-col justify-between min-h-[350px]">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-widest text-blue-500">The Ritual</span>
+                <h2 class="text-4xl mt-2 mb-4 serif italic">Glass Skin</h2>
+                <p class="text-sm text-gray-500">A translucent, multi-layer moisturizing strategy for a wet-look finish.</p>
+            </div>
+            <button onclick="alert('Steps: 1. Double Cleanse, 2. Essence, 3. Dewy Seal.')" class="w-fit text-xs font-bold border-b border-black pb-1 mt-6">VIEW RITUAL</button>
+        </div>
+
+    </main>
+
+    <div id="quizModal">
+        <div class="glass-card p-10 max-w-sm w-full mx-6 text-center shadow-2xl">
+            <h3 class="text-2xl serif italic mb-4">Your Glow Match</h3>
+            <p id="quizText" class="text-sm text-gray-600 mb-8">What is your skin goal?</p>
+            <div class="space-y-4">
+                <button onclick="setResult('Glass Skin Routine')" class="w-full py-3 rounded-2xl bg-white/50 border border-white text-sm">Deep Hydration</button>
+                <button onclick="setResult('Lip Glaze Routine')" class="w-full py-3 rounded-2xl bg-white/50 border border-white text-sm">High Shine Lips</button>
+            </div>
+            <button onclick="closeQuiz()" class="mt-8 text-xs underline">Close</button>
+        </div>
+    </div>
+
+    <footer class="mt-32 text-center pb-10">
+        <p class="text-[10px] tracking-[0.3em] uppercase opacity-40 font-bold">Anushka's Skin Care • 2026</p>
+    </footer>
+
+    <script>
+        function openQuiz() {
+            document.getElementById('quizModal').style.display = 'flex';
+        }
+
+        function closeQuiz() {
+            document.getElementById('quizModal').style.display = 'none';
+        }
+
+        function setResult(match) {
+            document.getElementById('quizText').innerHTML = "Your match is: <b>" + match + "</b><br>Try this tonight!";
+        }
+    </script>
+</body>
+</html>
